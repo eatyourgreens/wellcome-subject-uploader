@@ -1,0 +1,16 @@
+{
+  "name": "wellcome-subject-uploader",
+  "version": "0.0.1",
+  "dependencies": {
+    "csv": "^0.4.6",
+    "es6-promise": "^3.0.2",
+    "glob": "^6.0.4",
+    "panoptes-client": "git+https://github.com/zooniverse/panoptes-javascript-client.git#epic-refactor",
+    "request": "^2.67.0",
+    "superagent": "^1.6.1",
+    "yargs": "^3.31.0"
+  },
+  "scripts": {
+    "start": "node ./process-csv.js"
+  }
+}
