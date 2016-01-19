@@ -69,7 +69,7 @@ function processLine(line) {
       });
     })
     .catch(function(error){
-      console.info('Error creating subject', error);
+      console.info('Error creating subject set', error);
     });
   }
 }
@@ -156,7 +156,8 @@ function uploadFiles (subject){
       url = location[mimeType];
       body = files[subject.metadata.filename][mimeType];
       request.put({headers: headers, url: url, body: body}, function (error, message, body) {
-          console.info( 'uploaded to S3', message.statusCode, body.length);
+          console.info( 'uploaded to S3', subject.metadata.filename, mimeType, message.statusCode);
+          if (message.statusCode != 200) console.info( body );
           if (error) console.log('Error uploading to S3', subject.metadata.filename, mimeType, error);
         });
     }
