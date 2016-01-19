@@ -12,9 +12,9 @@ var WORKFLOWID = "215";
 // var WORKFLOWID = "1483";
 
 var BOROUGHS = [
-  'Battersea (London, England)',
-  'Bermondsey (London, England)',
-  'Camberwell (London, England)'
+  'Battersea (London, England)'
+  // 'Bermondsey (London, England)'
+  // 'Camberwell (London, England)'
 ];
 
 var csv = require('csv');
@@ -50,7 +50,7 @@ function processLine(line) {
     });
     count++;
     
-    if (count < 4) subjectSet.save()
+    if (count < 11) subjectSet.save()
     .then(function(subjectSet){
       var prefix = line['File prefix']
       return Promise.all( processPages(borough, prefix) );
@@ -70,6 +70,7 @@ function processLine(line) {
     })
     .catch(function(error){
       console.info('Error creating subject set', error);
+      subjectSet.delete();
     });
   }
 }
@@ -79,7 +80,7 @@ function processPages(borough, prefix) {
   var newSubjectIDs = []
   var images = glob.sync(IMAGEDIR + prefix + '_*.jpg');
   console.info(borough, prefix, images.length);
-  for (i=0; i < 11; i++) {
+  for (i=0; i < images.length; i++) {
     var good = false;
     filename = prefix + '_0_' + i
     subject = api.type('subjects').create({
